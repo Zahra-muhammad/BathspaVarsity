@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="public/student/css/team.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Animated Gradient Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Landing Page -->
+    <div class="page-wrapper" id="landingPage">
+        <div class="landing-container">
+            <h1 class="logo">PORTAL</h1>
+            <p class="tagline">Select Entry</p>
+            
+            <div class="choice-container">
+                <div class="choice-card" onclick="navigateToStudent()">
+                    <div class="choice-content">
+                        <div class="choice-number">01</div>
+                        <h2 class="choice-title">Student</h2>
+                    </div>
+                </div>
+                
+                <div class="choice-card" onclick="showPlayerForm()">
+                    <div class="choice-content">
+                        <div class="choice-number">02</div>
+                        <h2 class="choice-title">Player</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player Form Page -->
+    <div class="form-page" id="playerFormPage">
+        <div class="form-container">
+            <div class="form-header">
+                <div class="form-back" onclick="backToLanding()">← Index</div>
+                <h2 class="form-title">Player<br>Profile</h2>
+                <p class="form-subtitle">Complete your athletic profile</p>
+            </div>
+            
+            <form id="playerForm" onsubmit="submitPlayerForm(event)">
+                <div class="form-group">
+                    <label class="form-label">Sport</label>
+                    <select id="sport" class="form-select" required>
+                        <option value="">Select sport</option>
+                        <option value="Basketball">Basketball</option>
+                        <option value="Football">Football</option>
+                        <option value="Soccer">Soccer</option>
+                        <option value="Baseball">Baseball</option>
+                        <option value="Volleyball">Volleyball</option>
+                        <option value="Tennis">Tennis</option>
+                        <option value="Swimming">Swimming</option>
+                        <option value="Track & Field">Track & Field</option>
+                        <option value="Hockey">Hockey</option>
+                        <option value="Rugby">Rugby</option>
+                        <option value="Cricket">Cricket</option>
+                        <option value="Golf">Golf</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Team</label>
+                    <select id="teamName" class="form-select" required>
+                        <option value="">Select team</option>
+                        <option value="GREEN TEAM">GREEN TEAM</option>
+                        <option value="BLUE TEAM">BLUE TEAM</option>
+                        <option value="RED TEAM">RED TEAM</option>
+                        <option value="YELLOW TEAM">YELLOW TEAM</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Position</label>
+                    <input 
+                        type="text" 
+                        id="position" 
+                        class="form-input" 
+                        placeholder="Enter position (e.g., Point Guard, Forward)"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Dominant Hand</label>
+                    <select id="dominantHand" class="form-select" required>
+                        <option value="">Select hand</option>
+                        <option value="Right">Right</option>
+                        <option value="Left">Left</option>
+                        <option value="Both">Both</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Training Focus</label>
+                    <select id="trainingSkills" class="form-select" required>
+                        <option value="">Select training focus</option>
+                        <option value="Strength">Strength</option>
+                        <option value="Endurance">Endurance</option>
+                        <option value="Speed">Speed</option>
+                        <option value="Agility">Agility</option>
+                        <option value="Flexibility">Flexibility</option>
+                        <option value="Power">Power</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-submit">
+                    <span>Submit Profile</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        let mouseX = 0;
+        let mouseY = 0;
+        let followerX = 0;
+        let followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+
+        function animateFollower() {
+            const distX = mouseX - followerX;
+            const distY = mouseY - followerY;
+            
+            followerX += distX * 0.1;
+            followerY += distY * 0.1;
+            
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+            
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+
+        // Hover effects
+        const hoverElements = document.querySelectorAll('.choice-card, .btn-submit, .form-back');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorFollower.style.transform = 'scale(1.5)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorFollower.style.transform = 'scale(1)';
+            });
+        });
+
+        // Navigation
+        function navigateToStudent() {
+            document.body.style.transition = 'opacity 0.6s ease';
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = 'public/student/student-dashboard.html';
+            }, 600);
+        }
+
+        function showPlayerForm() {
+            const landing = document.getElementById('landingPage');
+            const formPage = document.getElementById('playerFormPage');
+            
+            landing.style.transition = 'opacity 0.6s ease';
+            landing.style.opacity = '0';
+            
+            setTimeout(() => {
+                landing.style.display = 'none';
+                formPage.classList.add('active');
+                formPage.style.opacity = '0';
+                
+                setTimeout(() => {
+                    formPage.style.transition = 'opacity 0.6s ease';
+                    formPage.style.opacity = '1';
+                }, 50);
+            }, 600);
+        }
+
+        function backToLanding() {
+            const landing = document.getElementById('landingPage');
+            const formPage = document.getElementById('playerFormPage');
+            
+            formPage.style.transition = 'opacity 0.6s ease';
+            formPage.style.opacity = '0';
+            
+            setTimeout(() => {
+                formPage.classList.remove('active');
+                landing.style.display = 'block';
+                
+                setTimeout(() => {
+                    landing.style.transition = 'opacity 0.6s ease';
+                    landing.style.opacity = '1';
+                }, 50);
+            }, 600);
+        }
+
+        async function submitPlayerForm(event) {
+            event.preventDefault();
+            
+            const playerData = {
+                sport: document.getElementById('sport').value,
+                team: document.getElementById('teamName').value,
+                position: document.getElementById('position').value,
+                dominantHand: document.getElementById('dominantHand').value,
+                trainingSkills: document.getElementById('trainingSkills').value
+            };
+            
+            console.log('📤 Submitting player data:', playerData);
+            
+            try {
+                // Save player profile to backend
+                const response = await fetch('/users/player-profile', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(playerData)
+                });
+
+                console.log('📥 Response status:', response.status);
+                const data = await response.json();
+                console.log('📥 Response data:', data);
+
+                if (response.ok) {
+                    console.log('✅ Player profile saved successfully');
+                    alert('Profile saved successfully! Redirecting...');
+                    
+                    // Navigate to player dashboard
+                    document.body.style.transition = 'opacity 0.6s ease';
+                    document.body.style.opacity = '0';
+                    setTimeout(() => {
+                        window.location.href = 'public/player/player-dashboard.html';
+                    }, 600);
+                } else {
+                    console.error('❌ Server error:', data);
+                    alert('Failed to save player profile: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('❌ Network error:', error);
+                alert('Network error occurred. Check console for details.');
+            }
+        }
+    </script>
+</body>
+</html>

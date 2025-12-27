@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sports Varsity - Login</title>
+  <link rel="stylesheet" href="public/student/css/login.css" />
+</head>
+<body>
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <div class="wireframe">
+    <img class="download" src="public/student/img/𝑲𝒊𝒍𝒍𝒊𝒂𝒏 𝑪𝒂𝒓𝒔𝒐𝒏 † 𝑮𝒐𝒅 𝒐𝒇 𝑴𝒂𝒍𝒊𝒄𝒆.jpg" alt="Basketball Background" />
+
+    <p class="sports-app-for-bath">
+      Sports app for Bath Spa designed to help students during sports fest and varsity events.
+    </p>
+    <p class="text-wrapper">Made by Zahra Muhammad Imtiaz</p>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="form-container">
+      <h2 class="div">Login to Your Account</h2>
+      <p class="join-bathspa-sports">
+        Access Bath Spa sports to stay updated on varsity events.
+      </p>
+
+      <label class="text-wrapper-3">Email Address*</label>
+      <input type="email" id="email" name="email" class="rectangle-2" placeholder="Enter email" required />
+
+      <label class="text-wrapper-4">Password*</label>
+      <input type="password" id="password" name="password" class="rectangle-3" placeholder="Enter password" required />
+
+      <button type="submit" class="rectangle-4 text-wrapper-6">Login</button>
+    </form>
+
+    <p class="text-wrapper-7">
+      Don't have an account?
+      <a href="/" class="login-link">Sign up</a>
+    </p>
+    <p class="text-wrapper-8">
+      By logging in, you agree to our terms of service and privacy policy.
+    </p>
+  </div>
+
+  <!-- Login Script -->
+  <script>
+  // Custom Cursor
+  const cursor = document.querySelector('.cursor');
+  const cursorFollower = document.querySelector('.cursor-follower');
+  let mouseX = 0;
+  let mouseY = 0;
+  let followerX = 0;
+  let followerY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+  });
+
+  function animateFollower() {
+      const distX = mouseX - followerX;
+      const distY = mouseY - followerY;
+      
+      followerX += distX * 0.1;
+      followerY += distY * 0.1;
+      
+      cursorFollower.style.left = followerX + 'px';
+      cursorFollower.style.top = followerY + 'px';
+      
+      requestAnimationFrame(animateFollower);
+  }
+  animateFollower();
+
+  const hoverElements = document.querySelectorAll('a, button, .cta-btn, .event-card, .menu-toggle');
+  hoverElements.forEach(el => {
+    el.addEventListener('mouseenter', () => cursor?.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor?.classList.remove('hover'));
+  });
+  
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    if (!email || !password) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        alert('Login successful!');
+        window.location.href = '/team'; // Changed from team.html to /team
+      } else if (response.status === 404) {
+        alert('Account not found! Please sign up first.');
+        window.location.href = '/'; // Changed from index.html to /
+      } else {
+        const errorData = await response.json();
+        alert('Error: ' + errorData.error);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Something went wrong. Please try again.');
+    }
+  });
+  </script>
+
+  <!-- Libraries -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="public/student/js/login.js"></script>
+</body>
+</html>

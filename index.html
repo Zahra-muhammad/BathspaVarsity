@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sports Varsity - Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="public/student/css/index.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <div class="wireframe">
+    <img class="download" src="public/student/img/𝑲𝒊𝒍𝒍𝒊𝒂𝒏 𝑪𝒂𝒓𝒔𝒐𝒏 † 𝑮𝒐𝒅 𝒐𝒇 𝑴𝒂𝒍𝒊𝒄𝒆.jpg" alt="Basketball Background" />
+
+    <p class="sports-app-for-bath">
+      Sports app for Bath Spa designed to help students during sports fest and varsity events.
+    </p>
+    <p class="text-wrapper">Made by Zahra Muhammad Imtiaz</p>
+
+    <!-- Signup Form -->
+    <form id="signupForm" class="form-container">
+      <h2 class="div">Create Your Account</h2>
+      <p class="join-bathspa-sports">
+        Join Bath Spa sports today for better experiences and stay updated on events.
+      </p>
+
+      <label class="text-wrapper-2">Full Name*</label>
+      <input type="text" id="fullname" name="name" class="rectangle" placeholder="Enter full name" required />
+
+      <label class="text-wrapper-3">Email Address*</label>
+      <input type="email" id="email" name="email" class="rectangle-2" placeholder="Enter email" required />
+
+      <label class="text-wrapper-4">Password*</label>
+      <input type="password" id="password" name="password" class="rectangle-3" placeholder="Enter password" required />
+
+      <label class="text-wrapper-5">Confirm Password*</label>
+      <input type="password" id="confirmPassword" class="rectangle-5" placeholder="Confirm password" required />
+
+      <p class="p">Password must be at least 8 characters including numbers and a special character.</p>
+
+      <button type="submit" class="rectangle-4 text-wrapper-6">Create Account</button>
+      <hr>
+
+      <!-- GOOGLE LOGIN BUTTON -->
+      <div class="google-login-box">
+        <a href="/auth/google" class="google-btn">
+          <img src="https://developers.google.com/identity/images/g-logo.png" class="google-icon">
+          Continue with Google
+        </a>
+      </div>
+      <!-- END GOOGLE LOGIN -->
+    </form>
+
+    <br><br><br>
+
+    <p class="text-wrapper-7">
+      Already have an account? <a href="/login" class="login-link">Login</a>
+    </p>
+    <p class="text-wrapper-8">
+      By creating an account, you agree to our terms of service and privacy policy.
+    </p>
+  </div>
+
+  <!-- Signup Script -->
+  <script>
+// Custom Cursor
+const cursor = document.querySelector('.cursor');
+const cursorFollower = document.querySelector('.cursor-follower');
+let mouseX = 0;
+let mouseY = 0;
+let followerX = 0;
+let followerY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+});
+
+function animateFollower() {
+    const distX = mouseX - followerX;
+    const distY = mouseY - followerY;
+    
+    followerX += distX * 0.1;
+    followerY += distY * 0.1;
+    
+    cursorFollower.style.left = followerX + 'px';
+    cursorFollower.style.top = followerY + 'px';
+    
+    requestAnimationFrame(animateFollower);
+}
+animateFollower();
+
+const hoverElements = document.querySelectorAll('a, button, .cta-btn, .event-card, .menu-toggle');
+hoverElements.forEach(el => {
+  el.addEventListener('mouseenter', () => cursor?.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor?.classList.remove('hover'));
+});
+
+// Signup form handler
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('fullname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+
+  if (password !== confirmPassword) {
+    alert('Passwords do not match!');
+    return;
+  }
+
+  if (password.length < 8 || !/\d/.test(password) || !/[!@#$%^&*]/.test(password)) {
+    alert('Password must be at least 8 characters long and include a number & special character.');
+    return;
+  }
+
+  try {
+    const response = await fetch('/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    if (response.ok) {
+      alert('Account created successfully!');
+      console.log('Redirecting to /team...');
+      window.location.href = '/team';
+    } else if (response.status === 409) {
+      alert('Account already exists! Redirecting to login page...');
+      window.location.href = '/login'; // Changed from login.html to /login
+    } else {
+      const errorData = await response.json();
+      alert('Error: ' + errorData.error);
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Something went wrong. Please try again later.');
+  }
+});
+  </script>
+
+  <!-- Libraries -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="public/student/js/index.js"></script>
+</body>
+</html>

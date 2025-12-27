@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&display=swap');
+
+:root {
+    --base-100: #181717;
+    --base-200: #292725;
+    --base-300: #f5f5f5;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Host Grotesk", sans-serif;
+    overflow: hidden;
+    background-color: #000000;
+    cursor: none;
+}
+
+/* Custom Cursor */
+.cursor {
+    width: 8px;
+    height: 8px;
+    background: #f5f5f5;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 8000;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-follower {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #f5f5f5;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+}
+
+.cursor.hover {
+    transform: translate(-50%, -50%) scale(3);
+}
+
+.menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: #000000;
+    z-index: 1000;
+}
+
+/* Left Panel */
+.menu-left {
+    flex: 1;
+    max-width: 50%;
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.menu-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.menu-list {
+    list-style: none;
+    width: 100%;
+}
+
+.menu-item {
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.menu-link {
+    display: block;
+    color: #f5f5f5;
+    text-decoration: none;
+    font-size: 4.5rem;
+    font-weight: 300;
+    line-height: 1;
+    transition: all 0.4s ease;
+    position: relative;
+    padding: 0.2rem 0;
+    cursor: none;
+}
+
+.menu-link:hover {
+    color: #f5f5f5ed;
+    transform: translateX(20px);
+}
+
+.menu-link sup {
+    font-size: 1.8rem;
+    vertical-align: super;
+}
+
+/* Bottom Section */
+.menu-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 2rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: transparent;
+    border: 1px solid rgba(212, 212, 212, 0.3);
+    border-radius: 50%;
+    color:#f5f5f5;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    cursor: none;
+}
+
+.social-link:hover {
+    background-color:#f5f5f5;
+    color: var(--bg-dark);
+    border-color: var(--accent-white);
+    transform: translateY(-3px);
+}
+
+.menu-footer-text {
+    max-width: 300px;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.menu-footer-text p {
+    color: #f5f5f5;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: right;
+}
+
+/* Right Panel */
+.menu-right {
+    flex: 1;
+    max-width: 50%;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 2rem;
+    overflow: hidden;
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem;
+}
+
+.overlay-text {
+    align-self: flex-end;
+    margin-top: auto;
+    margin-bottom: 2rem;
+}
+
+.large-text {
+    font-size: 8rem;
+    font-weight: 700;
+    color: white;
+    line-height: 0.8;
+    text-transform: lowercase;
+    opacity: 0.9;
+    font-family: "Host Grotesk", sans-serif;
+}
+
+.corner-text {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+.corner-text span {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 400;
+    opacity: 0.8;
+    letter-spacing: 0.1em;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.close-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2rem;
+    color: #f5f5f5;
+    font-size: 0.9rem;
+    font-weight: 400;
+    cursor: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+}
+
+.close-button:hover {
+    background-color: #f5f5f5;
+    color: #000;
+    border-color: #f5f5f5;
+    transform: scale(1.05);
+}
+
+.close-button:active {
+    transform: scale(0.95);
+}
+
+.close-button ion-icon {
+    font-size: 1.1rem;
+}
+
+.btn-icon .dot-icon {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn:hover .btn-icon .default-icon {
+  opacity: 0;
+}
+
+.btn:hover .btn-icon .dot-icon {
+  opacity: 1;
+}
+
+/* Circle Transition Effect */
+.transition-circle {
+  position: fixed;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: #181717;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .menu-container {
+        flex-direction: column;
+    }
+    
+    .menu-left,
+    .menu-right {
+        max-width: 100%;
+    }
+    
+    .menu-left {
+        flex: 0 0 60%;
+        padding: 2rem;
+    }
+    
+    .menu-right {
+        flex: 0 0 40%;
+    }
+    
+    .menu-link {
+        font-size: 2.5rem;
+    }
+    
+    .large-text {
+        font-size: 4rem;
+    }
+    
+    .image-container {
+        border-radius: 0 0 2rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-left {
+        padding: 1.5rem;
+    }
+    
+    .menu-link {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .menu-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+    
+    .menu-footer-text p {
+        text-align: left;
+    }
+    
+    .large-text {
+        font-size: 3rem;
+    }
+    
+    .close-btn {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+}

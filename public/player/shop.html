@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/shop.css">
+    <title>Player Shop - BSU Varsity</title>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen">
+    <div class="loading-bar">
+      <div class="loading-progress"></div>
+      <span class="loading-text-inside">Shop</span>
+    </div>
+    <div class="loading-note">Loading your sports experience, your journey starts here</div>
+  </div>
+ 
+  <div class="hero-top">
+    <a href="javascript:void(0)" class="cart-btn" id="openCart">
+      <div class="btn">
+        <div class="btn-label"><span>cart</span></div>
+        <div class="btn-icon">
+          <p id="cart-count">0</p>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button id="closeCart">Close</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <!-- Items dynamically added here -->
+    </div>
+    <div class="cart-total">Total: <span id="cartTotal">0.00</span> AED</div>
+    <div style="padding: 15px; display: flex; gap: 10px;">
+      <button id="clearCartBtn" style="flex: 1; padding: 10px; background: #f5576c; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Clear Cart
+      </button>
+      <button id="checkoutBtn" style="flex: 1; padding: 10px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Checkout
+      </button>
+    </div>
+  </div>
+
+  <div class="header">
+    <p class="main-h"><b>Stylish Clothes for <br>sports fest szn</b></p>
+    <p class="main-p1"><b>Our varsity and sports fest collection</b></p>
+    <p class="main-p2">perfect warm</p>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="sports-img">
+          <video autoplay muted loop playsinline>
+            <source src="img/Untitled design.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Menu Button -->
+  <a href="menu(shop).html" class="menu-btn">
+    <div class="btn">
+      <div class="btn-label"><span>Menu</span></div>
+      <div class="btn-icon">
+        <ion-icon name="menu-sharp" class="default-icon"></ion-icon>
+        <ion-icon name="ellipse" class="dot-icon"></ion-icon>
+      </div>
+    </div>
+  </a>
+
+  <div class="footer">
+    <p class="footone">jerseys & jackets</p>
+    <p class="foottwo">Sweatshirts</p>
+  </div>
+
+  <!-- SECTION 1: Sports Fest Jackets -->
+  <h1 class="heading">Our Sports Fest jackets</h1>
+  <div class="container">
+    <!-- Card 1 -->
+    <div class="card">
+      <img src="img/Untitled design (3).png" alt="Jacket">
+      <div class="title">Classic Red Jack</div>
+      <div class="subtitle">FRANCIACORTA DOCG</div>
+      <div class="price">45 AED</div>
+      <a href="#" class="btncard">Add to Cart</a>
+    </div>
+    
+    <!-- Card 2 -->
+    <div class="card">
+      <img src="img/Untitled design (4).png" alt="Jacket">
+      <div class="title">Mon Saten</div>
+      <div class="subtitle">FRANCIACORTA DOCG</div>
+      <div class="price">45 AED</div>
+      <a href="#" class="btncard">Add to Cart</a>
+    </div>
+    
+    <!-- Card 3 -->
+    <div class="card">
+      <img src="img/Untitled design (5).png" alt="Jacket">
+      <div class="title">Private Label</div>
+      <div class="subtitle">FRANCIACORTA DOCG</div>
+      <div class="price">45 AED</div>
+      <a href="#" class="btncard">Add to Cart</a>
+    </div>
+    
+    <!-- Card 4 -->
+    <div class="card">
+      <img src="img/WhatsApp_Image_2025-09-23_at_23.37.53_ce1dc03f-removebg-preview.png" alt="Jacket">
+      <div class="title">Extra Brut</div>
+      <div class="subtitle">FRANCIACORTA DOCG</div>
+      <div class="price">45 AED</div>
+      <a href="#" class="btncard">Add to Cart</a>
+    </div>
+    <!-- Database products will be appended here -->
+  </div>
+
+  <!-- SECTION 2: Varsity Jackets -->
+  <h1 class="heading">Your own varsity jackets</h1>
+  <div class="container">
+    <!-- Card 1 -->
+    <div class="card">
+      <img src="img/Untitled design (3).png" alt="Jacket">
+      <div class="title">Classic Red Jack</div>
+      <div class="subtitle">FRANCIACORTA DOCG</div>
+      <div class="price">45 AED</div>
+      <a href="#" class="btncard">Add to Cart</a>
+    </div>
+    
+    <!-- Card 2 -->
+    <div class="card">
+      <img src="img/Untitled design (4).png" alt="Jacket">
+      <div class="title">Mon Saten</div>
+      <div class="subtitle">FRANCIACORTA DOCG</div>
+      <div class="price">45 AED</div>
+      <a href="#" class="btncard">Add to Cart</a>
+    </div>
+    
+    <!-- Card 3 -->
+    <div class="card">
+      <img src="img/Untitled design (5).png" alt="Jacket">
+      <div class="title">Private Label</div>
+      <div class="subtitle">FRANCIACORTA DOCG</div>
+      <div class="price">45 AED</div>
+      <a href="#" class="btncard">Add to Cart</a>
+    </div>
+    
+    <!-- Card 4 -->
+    <div class="card">
+      <img src="img/WhatsApp_Image_2025-09-23_at_23.37.53_ce1dc03f-removebg-preview.png" alt="Jacket">
+      <div class="title">Extra Brut</div>
+      <div class="subtitle">FRANCIACORTA DOCG</div>
+      <div class="price">45 AED</div>
+      <a href="#" class="btncard">Add to Cart</a>
+    </div>
+    <!-- Database products will be appended here -->
+  </div>
+
+  <!-- 🎯 PLAYER-ONLY SECTION: Jerseys -->
+  <h1 class="heading">
+    Player Jerseys
+    <span style="font-size: 0.5em; margin-left: 15px; padding: 8px 20px; background: rgba(102, 126, 234, 0.2); border: 1px solid #667eea; border-radius: 20px; color: #667eea; vertical-align: middle;">
+      Players Only
+    </span>
+  </h1>
+  <div class="container">
+    <!-- Jerseys from database will be loaded here -->
+  </div>
+
+  <br><br><br>
+
+    <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>BSU VARSITY</h3>
+        <p>Excellence in athletic performance, education, and community. Join us in shaping the future of collegiate sports.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">→</a>
+          <a href="#" class="social-link">→</a>
+          <a href="#" class="social-link">→</a>
+          <a href="#" class="social-link">→</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="event-watcher.html" style="cursor: none;">Events</a></li>
+          <li><a href="shop.html" style="cursor: none;">Shop</a></li>
+          <li><a href="watch-sports.html" style="cursor: none;">Watch</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Programs</h4>
+        <ul class="footer-links">
+          <li><a href="#" style="cursor: none;">Basketball</a></li>
+          <li><a href="#" style="cursor: none;">Football</a></li>
+          <li><a href="#" style="cursor: none;">Athletics</a></li>
+          <li><a href="#" style="cursor: none;">Swimming</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><a href="#" style="cursor: none;">support@bsuvarsity.com</a></li>
+          <li><a href="#" style="cursor: none;">050 426 9495</a></li>
+          <li><a href="#" style="cursor: none;">RAK, UAE</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2025 BSU Varsity. All rights reserved.</p>
+      <p>Crafted with excellence</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/shop.js"></script>
+   
+</body>
+</html>

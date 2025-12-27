@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/event.css">
+    <title>Events</title>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+            <span class="loading-text-inside">Events</span>
+        </div>
+        <div class="loading-note">Loading your sports experience, your journey starts here</div>
+    </div>
+
+      <!-- Menu Button -->
+  <a href="menu(events).html" class="menu-btn">
+    <div class="btn">
+      <div class="btn-label"><span>Menu</span></div>
+      <div class="btn-icon">
+        <ion-icon name="menu-sharp" class="default-icon"></ion-icon>
+        <ion-icon name="ellipse" class="dot-icon"></ion-icon>
+      </div>
+    </div>
+  </a>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container hero-inner">
+                <div class="tag">Performance Intelligence</div>
+                <h1>Athletic Excellence<br/>Redefined</h1>
+                <p>Experience Bath Spa University sports with live analytics, elegant motion, and a data-first design. Real-time insights, standings, and upcoming fixtures — all in a cinematic interface.</p>
+            </div>
+        </section>
+
+        <!-- RESULTS -->
+        <section class="container">
+            <div class="section-label">Live</div>
+            <h2 class="section-title">Latest Results & Live Scoreboard</h2>
+            <div class="matches" id="matchesList"></div>
+        </section>
+
+        <br><br>
+
+        <!-- STANDINGS -->
+        <section class="container">
+            <div class="section-label">Rankings</div>
+            <h2 class="section-title">League Standings</h2>
+            <div class="table-wrap card">
+                <table id="standingsTable">
+                    <thead>
+                        <tr>
+                            <th>Pos</th>
+                            <th>Team</th>
+                            <th>P</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <br><br>
+
+        <!-- NEWS -->
+        <section class="container">
+            <div class="section-label">Updates</div>
+            <h2 class="section-title">Latest News</h2>
+            <div class="news-grid" id="newsGrid"></div>
+        </section>
+
+        <br><br>
+
+        <!-- EVENTS -->
+        <section class="container">
+            <div class="section-label">Calendar</div>
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events" id="eventsList"></div>
+        </section>
+    </main>
+
+    <br><br>
+
+   
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>BSU VARSITY</h3>
+        <p>Excellence in athletic performance, education, and community. Join us in shaping the future of collegiate sports.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">→</a>
+          <a href="#" class="social-link">→</a>
+          <a href="#" class="social-link">→</a>
+          <a href="#" class="social-link">→</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="event-watcher.html" style="cursor: none;">Events</a></li>
+          <li><a href="shop.html" style="cursor: none;">Shop</a></li>
+          <li><a href="watch-sports.html" style="cursor: none;">Watch</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Programs</h4>
+        <ul class="footer-links">
+          <li><a href="#" style="cursor: none;">Basketball</a></li>
+          <li><a href="#" style="cursor: none;">Football</a></li>
+          <li><a href="#" style="cursor: none;">Athletics</a></li>
+          <li><a href="#" style="cursor: none;">Swimming</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><a href="#" style="cursor: none;">support@bsuvarsity.com</a></li>
+          <li><a href="#" style="cursor: none;">050 426 9495</a></li>
+          <li><a href="#" style="cursor: none;">RAK, UAE</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2025 BSU Varsity. All rights reserved.</p>
+      <p>Crafted with excellence</p>
+    </div>
+  </footer>
+
+
+<script>
+  // Check and hide loader immediately before page renders
+  if (window.location.search.includes('skipLoader=true')) {
+    document.documentElement.classList.add('skip-loader');
+    document.body.classList.add('skip-loader');
+  }
+</script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/event.js"></script>
+</body>
+</html>

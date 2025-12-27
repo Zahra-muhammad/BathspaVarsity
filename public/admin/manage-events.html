@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events Management - Bath Spa Sports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f5e6e8 0%, #d4e4f7 100%);
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .main-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ff6b6b;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: #f0f9ff;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #0066cc;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .layout-wrapper {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: #fafbfc;
+      padding: 30px 0;
+      border-right: 1px solid #f0f0f0;
+      min-height: calc(100vh - 81px);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 30px;
+      color: #6b7280;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+
+    .nav-item:hover {
+      background: rgba(102, 126, 234, 0.05);
+      color: #667eea;
+    }
+
+    .nav-item.active {
+      background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, transparent 100%);
+      color: #667eea;
+      border-left-color: #667eea;
+    }
+
+    .nav-icon {
+      font-size: 1.3rem;
+    }
+
+    .content-wrapper {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .page-header {
+      margin-bottom: 30px;
+    }
+
+    .page-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      color: #6b7280;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    .tab:hover {
+      color: #667eea;
+    }
+
+    .tab.active {
+      color: #667eea;
+      border-bottom-color: #667eea;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .add-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 24px;
+    }
+
+    .add-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+    }
+
+    .form-container {
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      display: none;
+    }
+
+    .form-container.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-secondary {
+      background: #e9ecef;
+      color: #6b7280;
+    }
+
+    .btn-secondary:hover {
+      background: #dee2e6;
+    }
+
+    .items-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .item-card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .item-card:hover {
+      border-color: #667eea;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 12px;
+    }
+
+    .item-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+
+    .item-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+
+    .item-description {
+      color: #6b7280;
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-delete {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #ffebee;
+      color: #d32f2f;
+    }
+
+    .btn-delete:hover {
+      background: #ffcdd2;
+    }
+
+    .standing-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 80px 80px 80px 100px 100px;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .standing-rank {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #667eea;
+      text-align: center;
+    }
+
+    .standing-team {
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .standing-stat {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge-news {
+      background: #e3f2fd;
+      color: #1976d2;
+    }
+
+    .badge-event {
+      background: #f3e5f5;
+      color: #7b1fa2;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #6b7280;
+    }
+
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .success-message {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #10b981;
+      color: white;
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+    }
+
+    .success-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Image upload styling */
+    .image-upload-container {
+      border: 2px dashed #e0e0e0;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #fafafa;
+    }
+
+    .image-upload-container:hover {
+      border-color: #667eea;
+      background: #f5f7ff;
+    }
+
+    .image-upload-container.has-image {
+      padding: 0;
+      border: 1px solid #e0e0e0;
+    }
+
+    .image-preview {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .image-preview.active {
+      display: block;
+    }
+
+    .upload-placeholder {
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+
+    .upload-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: #667eea;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      .content-wrapper {
+        padding: 20px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .standing-row {
+        grid-template-columns: 50px 1fr 60px 60px 70px;
+        gap: 8px;
+        font-size: 0.85rem;
+      }
+
+      .sidebar {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="success-message" id="successMessage">✓ Data saved successfully!</div>
+
+  <div class="main-container">
+    <div class="top-bar">
+      <div class="logo">
+        <div class="logo-icon">🏃</div>
+        <span>Bath Spa Sports</span>
+      </div>
+
+      <div class="user-section">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>Admin Mode</span>
+        </div>
+
+        <div class="user-profile">
+          <div class="user-avatar">AD</div>
+          <span class="user-name">Admin</span>
+          <span>▾</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout-wrapper">
+      <aside class="sidebar">
+        <a href="/admin/adminhome" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="/admin/users" class="nav-item">
+          <span class="nav-icon">👥</span>
+          <span>User Management</span>
+        </a>
+        <a href="/admin/shop" class="nav-item">
+          <span class="nav-icon">🛍️</span>
+          <span>Shop Management</span>
+        </a>
+        <a href="/admin/watch-sports" class="nav-item">
+          <span class="nav-icon">📺</span>
+          <span>Watch Sports</span>
+        </a>
+        <a href="/admin/manage-player" class="nav-item">
+          <span class="nav-icon">📅</span>
+          <span>Schedule & Calendar</span>
+        </a>
+        <a href="/admin/manage-events" class="nav-item active">
+          <span class="nav-icon">🎯</span>
+          <span>Events Management</span>
+        </a>
+        <a href="/" class="nav-item">
+          <span class="nav-icon">🏠</span>
+          <span>Main Site</span>
+        </a>
+        <a href="/logout" class="nav-item">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </a>
+      </aside>
+
+      <div class="content-wrapper">
+        <div class="page-header">
+          <h1 class="page-title">Events Management</h1>
+          <p class="page-subtitle">Manage league standings, news updates, and upcoming events</p>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="standings">League Standings</button>
+          <button class="tab" data-tab="news">Latest News</button>
+          <button class="tab" data-tab="events">Upcoming Events</button>
+        </div>
+
+        <!-- League Standings Tab -->
+        <div class="tab-content active" id="standings">
+          <button class="add-button" id="addStandingBtn">
+            <span>+</span>
+            <span>Add Team Standing</span>
+          </button>
+
+          <div class="form-container" id="standingForm">
+            <h3 style="margin-bottom: 20px; font-size: 1.2rem;">Add Team Standing</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Team Name</label>
+                <input type="text" class="form-input" id="teamName" placeholder="Enter team name">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Team ID</label>
+                <input type="text" class="form-input" id="teamId" placeholder="e.g., BSU">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Wins</label>
+                <input type="number" class="form-input" id="teamWins" placeholder="0" min="0">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Draws</label>
+                <input type="number" class="form-input" id="teamDraws" placeholder="0" min="0">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Losses</label>
+                <input type="number" class="form-input" id="teamLosses" placeholder="0" min="0">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Points</label>
+                <input type="number" class="form-input" id="teamPoints" placeholder="0" min="0">
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn-primary" id="saveStanding">Save Standing</button>
+              <button class="btn-secondary" id="cancelStanding">Cancel</button>
+            </div>
+          </div>
+
+          <div id="standingsList"></div>
+        </div>
+
+        <!-- Latest News Tab -->
+        <div class="tab-content" id="news">
+          <button class="add-button" id="addNewsBtn">
+            <span>+</span>
+            <span>Add News Article</span>
+          </button>
+
+          <div class="form-container" id="newsForm">
+            <h3 style="margin-bottom: 20px; font-size: 1.2rem;">Add News Article</h3>
+            
+            <!-- Image Upload -->
+            <div class="form-group">
+              <label class="form-label">News Image</label>
+              <div class="image-upload-container" id="imageUploadContainer" onclick="document.getElementById('newsImageInput').click()">
+                <input type="file" id="newsImageInput" accept="image/*" style="display: none;">
+                <img id="imagePreview" class="image-preview" alt="Preview">
+                <div class="upload-placeholder" id="uploadPlaceholder">
+                  <div class="upload-icon">📸</div>
+                  <p><strong>Click to upload image</strong></p>
+                  <p style="font-size: 0.8rem; margin-top: 8px;">PNG, JPG, WEBP up to 5MB</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">News Title</label>
+              <input type="text" class="form-input" id="newsTitle" placeholder="Enter news headline">
+            </div>
+            <div class="form-group">
+              <label class="form-label">News Content</label>
+              <textarea class="form-textarea" id="newsContent" placeholder="Write the news article content..."></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select class="form-select" id="newsCategory">
+                  <option value="general">General</option>
+                  <option value="match">Match Report</option>
+                  <option value="Football">Football</option>
+                  <option value="Athletics">Athletics</option>
+                  <option value="Facilities">Facilities</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Time Reference</label>
+                <input type="text" class="form-input" id="newsTime" placeholder="e.g., 3 hours ago" value="Just now">
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn-primary" id="saveNews">Publish News</button>
+              <button class="btn-secondary" id="cancelNews">Cancel</button>
+            </div>
+          </div>
+
+          <div class="items-grid" id="newsList"></div>
+        </div>
+
+        <!-- Upcoming Events Tab -->
+        <div class="tab-content" id="events">
+          <button class="add-button" id="addEventBtn">
+            <span>+</span>
+            <span>Add New Event</span>
+          </button>
+
+          <div class="form-container" id="eventForm">
+            <h3 style="margin-bottom: 20px; font-size: 1.2rem;">Add Upcoming Event</h3>
+            <div class="form-group">
+              <label class="form-label">Event Title</label>
+              <input type="text" class="form-input" id="eventTitle" placeholder="Enter event name">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Event Date & Time</label>
+                <input type="datetime-local" class="form-input" id="eventDatetime">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-input" id="eventLocation" placeholder="Event venue">
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn-primary" id="saveEvent">Create Event</button>
+              <button class="btn-secondary" id="cancelEvent">Cancel</button>
+            </div>
+          </div>
+
+          <div class="items-grid" id="eventsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+// ============================================
+// EVENTS MANAGEMENT - ADMIN PANEL WITH IMAGE UPLOAD
+// ============================================
+
+// Data arrays
+let standings = [];
+let news = [];
+let events = [];
+let currentNewsImage = null;
+
+// Image upload handling
+document.getElementById('newsImageInput').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      currentNewsImage = event.target.result;
+      document.getElementById('imagePreview').src = currentNewsImage;
+      document.getElementById('imagePreview').classList.add('active');
+      document.getElementById('uploadPlaceholder').style.display = 'none';
+      document.getElementById('imageUploadContainer').classList.add('has-image');
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+// Load data on page load
+function loadData() {
+  try {
+    const savedStandings = localStorage.getItem('bsu-standings');
+    const savedNews = localStorage.getItem('bsu-news');
+    const savedEvents = localStorage.getItem('bsu-events');
+    
+    standings = savedStandings ? JSON.parse(savedStandings) : [];
+    news = savedNews ? JSON.parse(savedNews) : [];
+    events = savedEvents ? JSON.parse(savedEvents) : [];
+    
+    renderStandings();
+    renderNews();
+    renderEvents();
+    
+    console.log('✓ Data loaded from localStorage');
+  } catch (error) {
+    console.error('Error loading data:', error);
+  }
+}
+
+// Save to localStorage
+function saveToLocalStorage() {
+  try {
+    localStorage.setItem('bsu-standings', JSON.stringify(standings));
+    localStorage.setItem('bsu-news', JSON.stringify(news));
+    localStorage.setItem('bsu-events', JSON.stringify(events));
+    console.log('✓ Data saved to localStorage');
+  } catch (error) {
+    console.error('Error saving to localStorage:', error);
+  }
+}
+
+// Show success message
+function showSuccess(message) {
+  const msg = document.getElementById('successMessage');
+  if (msg) {
+    msg.textContent = '✓ ' + message;
+    msg.classList.add('show');
+    setTimeout(() => msg.classList.remove('show'), 3000);
+  }
+}
+
+// ============================================
+// TAB SWITCHING
+// ============================================
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+// ============================================
+// LEAGUE STANDINGS
+// ============================================
+
+document.getElementById('addStandingBtn').addEventListener('click', () => {
+  document.getElementById('standingForm').classList.add('active');
+});
+
+document.getElementById('cancelStanding').addEventListener('click', () => {
+  document.getElementById('standingForm').classList.remove('active');
+  clearStandingForm();
+});
+
+document.getElementById('saveStanding').addEventListener('click', () => {
+  const wins = parseInt(document.getElementById('teamWins').value || 0);
+  const draws = parseInt(document.getElementById('teamDraws').value || 0);
+  const losses = parseInt(document.getElementById('teamLosses').value || 0);
+  const teamName = document.getElementById('teamName').value.trim();
+  
+  if (!teamName) {
+    alert('Please enter a team name');
+    return;
+  }
+
+  const standing = {
+    id: document.getElementById('teamId').value.trim() || 'TEAM' + Date.now(),
+    name: teamName,
+    played: wins + draws + losses,
+    w: wins,
+    d: draws,
+    l: losses,
+    points: parseInt(document.getElementById('teamPoints').value || 0)
+  };
+
+  standings.push(standing);
+  standings.sort((a, b) => b.points - a.points);
+  saveToLocalStorage();
+  renderStandings();
+  document.getElementById('standingForm').classList.remove('active');
+  clearStandingForm();
+  showSuccess('Team standing added and saved to localStorage!');
+});
+
+function clearStandingForm() {
+  document.getElementById('teamName').value = '';
+  document.getElementById('teamId').value = '';
+  document.getElementById('teamWins').value = '';
+  document.getElementById('teamDraws').value = '';
+  document.getElementById('teamLosses').value = '';
+  document.getElementById('teamPoints').value = '';
+}
+
+function renderStandings() {
+  const list = document.getElementById('standingsList');
+  if (!list) return;
+  
+  if (standings.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🏆</div><p>No team standings yet. Add your first team!</p></div>';
+    return;
+  }
+
+  list.innerHTML = standings.map((s, idx) => `
+    <div class="standing-row">
+      <div class="standing-rank">#${idx + 1}</div>
+      <div class="standing-team">${s.name}</div>
+      <div class="standing-stat">${s.w}W</div>
+      <div class="standing-stat">${s.d}D</div>
+      <div class="standing-stat">${s.l}L</div>
+      <div class="standing-stat">${s.points} pts</div>
+      <div class="item-actions">
+        <button class="btn-delete" onclick="deleteStanding('${s.id}')">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function deleteStanding(id) {
+  if (confirm('Are you sure you want to delete this team standing?')) {
+    standings = standings.filter(s => s.id !== id);
+    saveToLocalStorage();
+    renderStandings();
+    showSuccess('Team standing deleted!');
+  }
+}
+
+// ============================================
+// NEWS WITH IMAGE
+// ============================================
+
+document.getElementById('addNewsBtn').addEventListener('click', () => {
+  document.getElementById('newsForm').classList.add('active');
+});
+
+document.getElementById('cancelNews').addEventListener('click', () => {
+  document.getElementById('newsForm').classList.remove('active');
+  clearNewsForm();
+});
+
+document.getElementById('saveNews').addEventListener('click', () => {
+  const newsItem = {
+    id: 'n' + Date.now(),
+    cat: document.getElementById('newsCategory').value,
+    title: document.getElementById('newsTitle').value,
+    content: document.getElementById('newsContent').value,
+    time: document.getElementById('newsTime').value,
+    image: currentNewsImage || null
+  };
+
+  if (newsItem.title && newsItem.content) {
+    news.unshift(newsItem);
+    saveToLocalStorage();
+    renderNews();
+    document.getElementById('newsForm').classList.remove('active');
+    clearNewsForm();
+    showSuccess('News article published and saved to localStorage!');
+  } else {
+    alert('Please fill in all required fields');
+  }
+});
+
+function clearNewsForm() {
+  document.getElementById('newsTitle').value = '';
+  document.getElementById('newsContent').value = '';
+  document.getElementById('newsCategory').value = 'general';
+  document.getElementById('newsTime').value = 'Just now';
+  currentNewsImage = null;
+  document.getElementById('imagePreview').classList.remove('active');
+  document.getElementById('uploadPlaceholder').style.display = 'block';
+  document.getElementById('imageUploadContainer').classList.remove('has-image');
+  document.getElementById('newsImageInput').value = '';
+}
+
+function renderNews() {
+  const list = document.getElementById('newsList');
+  if (!list) return;
+  
+  if (news.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📰</div><p>No news articles yet. Publish your first article!</p></div>';
+    return;
+  }
+
+  list.innerHTML = news.map(n => `
+    <div class="item-card">
+      ${n.image ? `<img src="${n.image}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;">` : ''}
+      <div class="item-header">
+        <div>
+          <div class="item-title">${n.title}</div>
+          <div class="item-meta">
+            <span class="badge badge-news">${n.cat}</span>
+            <span>${n.time}</span>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-delete" onclick="deleteNews('${n.id}')">Delete</button>
+        </div>
+      </div>
+      <div class="item-description">${n.content || ''}</div>
+    </div>
+  `).join('');
+}
+
+function deleteNews(id) {
+  if (confirm('Are you sure you want to delete this news article?')) {
+    news = news.filter(n => n.id !== id);
+    saveToLocalStorage();
+    renderNews();
+    showSuccess('News article deleted!');
+  }
+}
+
+// ============================================
+// EVENTS
+// ============================================
+
+document.getElementById('addEventBtn').addEventListener('click', () => {
+  document.getElementById('eventForm').classList.add('active');
+});
+
+document.getElementById('cancelEvent').addEventListener('click', () => {
+  document.getElementById('eventForm').classList.remove('active');
+  clearEventForm();
+});
+
+document.getElementById('saveEvent').addEventListener('click', () => {
+  const event = {
+    id: 'e' + Date.now(),
+    title: document.getElementById('eventTitle').value,
+    datetime: document.getElementById('eventDatetime').value,
+    location: document.getElementById('eventLocation').value
+  };
+
+  if (event.title && event.datetime && event.location) {
+    events.push(event);
+    events.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+    saveToLocalStorage();
+    renderEvents();
+    document.getElementById('eventForm').classList.remove('active');
+    clearEventForm();
+    showSuccess('Event created and saved to localStorage!');
+  } else {
+    alert('Please fill in all required fields');
+  }
+});
+
+function clearEventForm() {
+  document.getElementById('eventTitle').value = '';
+  document.getElementById('eventDatetime').value = '';
+  document.getElementById('eventLocation').value = '';
+}
+
+function renderEvents() {
+  const list = document.getElementById('eventsList');
+  if (!list) return;
+  
+  if (events.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📅</div><p>No upcoming events yet. Create your first event!</p></div>';
+    return;
+  }
+
+  list.innerHTML = events.map(e => {
+    const dt = new Date(e.datetime);
+    return `
+      <div class="item-card">
+        <div class="item-header">
+          <div>
+            <div class="item-title">${e.title}</div>
+            <div class="item-meta">
+              <span class="badge badge-event">Event</span>
+              <span>📍 ${e.location}</span>
+              <span>📅 ${dt.toLocaleDateString()}</span>
+              <span>⏰ ${dt.toLocaleTimeString()}</span>
+            </div>
+          </div>
+          <div class="item-actions">
+            <button class="btn-delete" onclick="deleteEvent('${e.id}')">Delete</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function deleteEvent(id) {
+  if (confirm('Are you sure you want to delete this event?')) {
+    events = events.filter(e => e.id !== id);
+    saveToLocalStorage();
+    renderEvents();
+    showSuccess('Event deleted!');
+  }
+}
+
+// ============================================
+// INITIALIZE ON PAGE LOAD
+// ============================================
+
+window.addEventListener('DOMContentLoaded', loadData);
+</script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+ <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/watch-sports.css">
+    <title>Watch Sports - BSU Varsity</title>
+</head>
+<body>
+
+          <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+<!-- Loading Screen -->
+  <div class="loading-screen">
+    <div class="loading-bar">
+      <div class="loading-progress"></div>
+      <span class="loading-text-inside">Live Sports</span>
+    </div>
+    <div class="loading-note">Loading your sports experience, your journey starts here</div>
+  </div>
+
+  <!-- Hero Wireframe Section -->
+  <div class="wireframe">
+    <!-- Background Videos -->
+    <video class="download" autoplay loop muted playsinline>
+      <source src="img/Untitled design (2).mp4" type="video/mp4">
+    </video>
+    <video class="img" autoplay loop muted playsinline>
+      <source src="img/Untitled design (3).mp4" type="video/mp4">
+    </video>
+    <video class="download-2" autoplay loop muted playsinline>
+      <source src="img/Untitled design (8).mp4" type="video/mp4">
+    </video>
+    <video class="download-3" autoplay loop muted playsinline>
+      <source src="img/Untitled design (4).mp4" type="video/mp4">
+    </video>
+    <video class="download-4" autoplay loop muted playsinline>
+      <source src="img/Untitled design (5).mp4" type="video/mp4">
+    </video>
+    <video class="download-5" autoplay loop muted playsinline>
+      <source src="img/Untitled design (6).mp4" type="video/mp4">
+    </video>
+    <video class="download-6" autoplay loop muted playsinline>
+      <source src="img/Untitled design (7).mp4" type="video/mp4">
+    </video>
+
+    <!-- Text Labels -->
+    <div class="text-wrapper-5"><b>WATCH</b></div>
+    <div class="div">FULL MATCHES</div>
+    <div class="text-wrapper-2">HIGHLIGHTS</div>
+    <div class="text-wrapper-3">OLD MATCHES</div>
+    <div class="text-wrapper-4">UPCOMING MATCHES</div>
+    <div class="text-wrapper">FULL MATCHES</div>
+  </div>
+
+  <!-- Video Content Section -->
+  <div class="vid-container">
+    <!-- Full Matches Section -->
+    <div class="category-section">
+      <h2 class="category-title">Full Matches</h2>
+      <div id="full-matches-grid" class="video-grid">
+        <div class="loading-videos">Loading full matches...</div>
+      </div>
+    </div>
+
+    <!-- Highlights Section -->
+    <div class="category-section">
+      <h2 class="category-title">Highlights</h2>
+      <div id="highlights-grid" class="video-grid">
+        <div class="loading-videos">Loading highlights...</div>
+      </div>
+    </div>
+
+    <!-- Old Matches Section -->
+    <div class="category-section">
+      <h2 class="category-title">Old Matches</h2>
+      <div id="old-matches-grid" class="video-grid">
+        <div class="loading-videos">Loading old matches...</div>
+      </div>
+    </div>
+
+    <!-- Upcoming Matches Section -->
+    <div class="category-section">
+      <h2 class="category-title">Upcoming Matches</h2>
+      <div id="upcoming-matches-grid" class="video-grid">
+        <div class="loading-videos">Loading upcoming matches...</div>
+      </div>
+    </div>
+  </div>
+
+      <!-- Menu Button -->
+  <a href="menu(watch-sports).html" class="menu-btn">
+    <div class="btn">
+      <div class="btn-label"><span>Menu</span></div>
+      <div class="btn-icon">
+        <ion-icon name="menu-sharp" class="default-icon"></ion-icon>
+        <ion-icon name="ellipse" class="dot-icon"></ion-icon>
+      </div>
+    </div>
+  </a>
+
+ 
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>BSU VARSITY</h3>
+        <p>Excellence in athletic performance, education, and community. Join us in shaping the future of collegiate sports.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">→</a>
+          <a href="#" class="social-link">→</a>
+          <a href="#" class="social-link">→</a>
+          <a href="#" class="social-link">→</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="event-watcher.html" style="cursor: none;">Events</a></li>
+          <li><a href="shop.html" style="cursor: none;">Shop</a></li>
+          <li><a href="watch-sports.html" style="cursor: none;">Watch</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Programs</h4>
+        <ul class="footer-links">
+          <li><a href="#" style="cursor: none;">Basketball</a></li>
+          <li><a href="#" style="cursor: none;">Football</a></li>
+          <li><a href="#" style="cursor: none;">Athletics</a></li>
+          <li><a href="#" style="cursor: none;">Swimming</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><a href="#" style="cursor: none;">support@bsuvarsity.com</a></li>
+          <li><a href="#" style="cursor: none;">050 426 9495</a></li>
+          <li><a href="#" style="cursor: none;">RAK, UAE</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2025 BSU Varsity. All rights reserved.</p>
+      <p>Crafted with excellence</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+   <!-- Add this script in the <head> section of student-dashboard.html -->
+<!-- Place it BEFORE the closing </head> tag -->
+
+<script>
+  // Check and hide loader immediately before page renders
+  if (window.location.search.includes('skipLoader=true')) {
+    document.documentElement.classList.add('skip-loader');
+    document.body.classList.add('skip-loader');
+  }
+</script>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/watch-sports.js"></script>
+</body>
+</html>

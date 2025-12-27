@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Access</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    
+        <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+<div class="container">
+        <h1 id="welcomeMessage">Hello Student</h1>
+        <div class="subtitle">
+            Since you are not a Player, You aren't permissible for this page<br>
+            If you are looking for <strong>updates</strong> and <strong>events</strong>
+        </div>
+        <a href="event-watcher.html" class="events-btn">Event page</a>
+        <a href="student-dashboard.html" class="back-btn">Home Page</a>
+    </div>
+
+    <script>
+
+   // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        let mouseX = 0;
+        let mouseY = 0;
+        let followerX = 0;
+        let followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+
+        function animateFollower() {
+            const distX = mouseX - followerX;
+            const distY = mouseY - followerY;
+            
+            followerX += distX * 0.1;
+            followerY += distY * 0.1;
+            
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+            
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+
+  const hoverElements = document.querySelectorAll('a, button, .cta-btn, .event-card, .menu-toggle');
+  hoverElements.forEach(el => {
+    el.addEventListener('mouseenter', () => cursor?.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor?.classList.remove('hover'));
+  });
+
+        // Fetch and display the logged-in user's name
+        async function loadUserProfile() {
+            try {
+                const response = await fetch('/users/current-user', {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const userData = await response.json();
+                    const firstName = userData.name.split(' ')[0];
+                    document.getElementById('welcomeMessage').textContent = `Hello ${firstName}`;
+                } else {
+                    console.warn('Could not fetch user data');
+                }
+            } catch (error) {
+                console.error('Error loading user profile:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadUserProfile);
+    </script>
+</body>
+</html>

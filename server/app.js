@@ -6,7 +6,7 @@ const session = require('express-session');
 require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
@@ -18,7 +18,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: { 
-    secure: false,
+    secure: process.env.NODE_ENV === 'production',
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
@@ -31,7 +31,7 @@ app.use(passport.session());
 require('./passport-config');
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/test')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/test')
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
@@ -142,8 +142,13 @@ app.get('/logout', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`🚀 Server running at http://localhost:${port}`);
-  console.log(`📊 Admin Panel: http://localhost:${port}/admin/adminhome`);
+// Only start server if not in Vercel (Vercel handles this)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`🚀 Server running at http://localhost:${port}`);
+    console.log(`📊 Admin Panel: http://localhost:${port}/admin/adminhome`);
+  });
+}
 
-});
+// Export the Express app for Vercel
+module.exports = app;

@@ -2,10 +2,18 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./models/user');
 
+// Dynamic callback URL based on environment
+const getCallbackURL = () => {
+  if (process.env.NODE_ENV === 'production') {
+    return process.env.CALLBACK_URL || 'https://bathspa-varsity.vercel.app/auth/google/callback';
+  }
+  return 'http://localhost:3000/auth/google/callback';
+};
+
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID || '843186991786-999eit374fq5cpuo9gc59h4pp59q1l13.apps.googleusercontent.com',
     clientSecret: process.env.GOOGLE_CLIENT_SECRET || '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',
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: getCallbackURL()
   },
   async (accessToken, refreshToken, profile, done) => {
     try {
